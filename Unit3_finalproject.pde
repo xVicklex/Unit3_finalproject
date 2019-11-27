@@ -4,12 +4,20 @@ PImage space;
 PImage kessel;
 PImage jakku;
 PImage Endor;
-PImage Atollon;
+PImage Hoth;
 PImage falcon;
 PImage stardestroyer;
 PImage tiefighter;
 int X = 200;
 int Y = 300;
+int jakkuX=200;
+int jakkuY=200;
+int EndorX=600;
+int EndorY=200;
+int kesselX=600;
+int kesselY=600;
+int HothX=200;
+int HothY=600;
 void setup()
 {
   size(800, 800);
@@ -28,25 +36,23 @@ void setup()
   kessel.resize(150, 150);
 
   imageMode(CENTER);
-  Atollon = loadImage("Atollon.gif");
-  Atollon.resize(150, 150);
+  Hoth = loadImage("Hoth.gif");
+  Hoth.resize(150, 150);
 
   Endor = loadImage("Endor.png");
   Endor.resize(80, 80);
 
   jakku = loadImage("jakku.png");
   jakku.resize(100, 100);
-  
- 
 }
 void draw()
 {
   background(255, 255, 255);
   if (Scene == 1)
   {
+
     Scene1();
-  }
-  if (Scene == 2)
+  } else if (Scene == 2)
   {
     Scene2();
   }
@@ -56,14 +62,14 @@ void draw()
 void Scene1()
 {
 
-  image(falcon, X, Y);
+  image(falcon, X, Y, 50, 50);
 
 
 
-  image(jakku, 200, 200);
-  image(Endor, 600, 200);
-  image(Atollon, 200, 600);
-  image(kessel, 600, 600);
+  image(jakku, 200, 200, 100, 100);
+  image(Endor, 600, 200, 80, 80);
+  image(Hoth, 200, 600, 150,150);
+  image(kessel, 600, 600, 150,150);
 
 
   if (DestPlanet == 1)
@@ -72,17 +78,20 @@ void Scene1()
     Y = Y - 2;
     if (Y<200)
     {
-      DestPlanet = 2;
+      Scene = 2;
+     // DestPlanet = 2;
     }
   }
 
   if (DestPlanet == 2)
   {
+    
     X = X + 2;
 
     if (X>600)
     {
-      DestPlanet = 3;
+      Scene = 2;
+     // DestPlanet = 3;
     }
   }
 
@@ -92,7 +101,8 @@ void Scene1()
     Y = Y + 2;
     if (Y>600)
     {
-      DestPlanet = 4;
+      Scene = 2;
+      //DestPlanet = 4;
     }
   }
 
@@ -102,7 +112,8 @@ void Scene1()
 
     if (X<200)
     {
-      DestPlanet = 1;
+      Scene = 2;
+      //DestPlanet = 1;
     }
   }
 }
@@ -117,13 +128,90 @@ void Scene2()
 
     image(falcon, X, Y);
     falcon.resize(100, 100);
-   
-   fill(0,0,0);
-   textSize(60);
-   text("Launch",200,200);
-   
 
-   
-   
+    fill(0, 0, 0);
+    textSize(60);
+    text("Launch", 200, 200);
+
+    if (keyPressed)
+    {
+      if (key == ' ')
+      {
+        Scene = 1;
+        DestPlanet = 2;
+        X = jakkuX;
+        Y = jakkuY;
+      }
+    }
+  } else if (DestPlanet == 2)
+  {
+    image(Endor, 400, 400);
+    Endor.resize(300, 300);
+
+    image(falcon, X, Y);
+    falcon.resize(100, 100);
+
+    fill(0, 0, 0);
+    textSize(60);
+    text("Launch", 200, 200);
+
+    if (keyPressed)
+    {
+      if (key == ' ')
+      {
+        Scene = 1;
+        DestPlanet = 3;
+        X = EndorX;
+        Y = EndorY;
+      }
+    }
+  } else if (DestPlanet == 3)
+  {
+    image(kessel, 400, 400);
+    kessel.resize(300, 300);
+
+    image(falcon, X, Y);
+    falcon.resize(100, 100);
+
+    fill(0, 0, 0);
+    textSize(60);
+    text("Launch", 200, 200);
+
+    if (keyPressed)
+    {
+      if (key == ' ')
+      {
+        Scene = 1;
+        DestPlanet = 4;
+        X = kesselX;
+        Y = kesselY;
+      }
+    }
   }
+  
+  else if (DestPlanet == 4)
+  {
+    image(Hoth, 400, 400);
+    Hoth.resize(150, 150);
+
+    image(falcon, X, Y);
+    falcon.resize(100, 100);
+
+    fill(0, 0, 0);
+    textSize(60);
+    text("Launch", 200, 200);
+
+    if (keyPressed)
+    {
+      if (key == ' ')
+      {
+        Scene = 1;
+        DestPlanet = 1;
+        X = HothX;
+        Y = HothY;
+      }
+    }
+  }
+  
+  
 }
